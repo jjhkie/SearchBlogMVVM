@@ -1,9 +1,4 @@
-//
-//  AlertActionConvertible.swift
-//  SearchBlog
-//
-//  Created by kup on 2022/09/19.
-//
+
 
 import UIKit
 

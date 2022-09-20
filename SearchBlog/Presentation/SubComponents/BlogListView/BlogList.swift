@@ -15,15 +15,10 @@ class BlogListView: UITableView {
                 height: 50)
         )
     )
-    
-    //MainViewController = > BlogListView
-    
-    let cellData = PublishSubject<[BlogListCellData]>()
-    
+
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         
-        bind()
         attribute()
     }
     
@@ -32,10 +27,11 @@ class BlogListView: UITableView {
     }
     
     
-    private func bind(){
+    func bind(_ VM: BlogListViewModel){
         
-        cellData
-            .asDriver(onErrorJustReturn: [])
+        headerView.bind(VM.filterViewModel)
+        
+        VM.cellData
             .drive(self.rx.items){tv, row, data in
                 let index = IndexPath(row: row, section: 0)
                 let cell = tv.dequeueReusableCell(withIdentifier: "BlogListCell", for: index) as! BlogListCell
